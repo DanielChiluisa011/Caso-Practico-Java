@@ -29,12 +29,15 @@ com/bancopichincha/infraestructure/repositories/CuentaRepository.class
 com/bancopichincha/application/command/update/UpdateClienteCommandHandler.class
 com/bancopichincha/infraestructure/mappers/CuentaMapperImpl.class
 com/bancopichincha/api/controller/CuentasController.class
+com/bancopichincha/application/command/read/ReadClientesCommandHandler.class
 com/bancopichincha/application/dto/response/CreateCuentaResponse.class
+com/bancopichincha/application/command/read/ReadClientesCommand.class
 com/bancopichincha/application/command/create/CreateClienteCommandHandler.class
 com/bancopichincha/application/command/create/CreateCuentaCommandHanlder.class
 com/bancopichincha/application/command/create/CreateClienteCommand.class
 com/bancopichincha/infraestructure/model/CuentaModel.class
 com/bancopichincha/domain/entities/Movimiento.class
+com/bancopichincha/infraestructure/mappers/MovimientoMapperImpl.class
 com/bancopichincha/infraestructure/repositories/jpa/JpaCuentaRepository.class
 com/bancopichincha/infraestructure/model/MovimientoModel.class
 com/bancopichincha/infraestructure/mappers/ClienteMapper.class

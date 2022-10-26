@@ -13,6 +13,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CuentaMapper {
     @Mapping(source="id", target="cuentaId")
+    @Mapping(source="numero", target="numero")
     @Mapping(source="tipo", target="tipo")
     @Mapping(source="saldoInicial", target="saldoInicial")
     @Mapping(source="estado", target="estado")

@@ -22,6 +22,8 @@ public class ClienteMapper {
         _cliente.setDireccion(model.getDireccion());
         _cliente.setIdentificacion(model.getIdentificacion());
         _cliente.setTelefono(model.getTelefono());
+        _cliente.setEdad(model.getEdad());
+        _cliente.setGenero(model.getGenero());
         return _cliente;
     }
     public static ClienteModel toModel(Cliente entity){

@@ -2,8 +2,6 @@ package com.bancopichincha.infraestructure.mappers;
 
 import com.bancopichincha.domain.entities.Movimiento;
 import com.bancopichincha.infraestructure.model.MovimientoModel;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -11,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-26T16:06:51-0500",
+    date = "2022-10-26T17:20:31-0500",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.15 (Oracle Corporation)"
 )
 @Component
@@ -27,9 +25,7 @@ public class MovimientoMapperImpl implements MovimientoMapper {
 
         movimiento.setMovimientoId( model.getId() );
         movimiento.setFecha( model.getFecha() );
-        if ( model.getTipo() != null ) {
-            movimiento.setTipo( new SimpleDateFormat().format( model.getTipo() ) );
-        }
+        movimiento.setTipo( model.getTipo() );
         movimiento.setValor( model.getValor() );
         movimiento.setSaldo( model.getSaldo() );
 
@@ -60,14 +56,7 @@ public class MovimientoMapperImpl implements MovimientoMapper {
 
         movimientoModel.setId( entity.getMovimientoId() );
         movimientoModel.setFecha( entity.getFecha() );
-        try {
-            if ( entity.getTipo() != null ) {
-                movimientoModel.setTipo( new SimpleDateFormat().parse( entity.getTipo() ) );
-            }
-        }
-        catch ( ParseException e ) {
-            throw new RuntimeException( e );
-        }
+        movimientoModel.setTipo( entity.getTipo() );
         movimientoModel.setValor( entity.getValor() );
         movimientoModel.setSaldo( entity.getSaldo() );
 

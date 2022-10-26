@@ -33,6 +33,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,
                         moduleName,moduleClientes,moduleMovimientos,swaggerPage)
                 .permitAll()
+                .antMatchers(HttpMethod.DELETE,
+                        moduleName,moduleClientes,moduleMovimientos,swaggerPage)
+                .permitAll()
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
                         "/swagger-resources/**",

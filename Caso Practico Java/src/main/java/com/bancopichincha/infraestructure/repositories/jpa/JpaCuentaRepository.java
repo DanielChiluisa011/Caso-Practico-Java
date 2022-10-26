@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface JpaCuentaRepository extends JpaRepository<CuentaModel, String> {
     Optional<CuentaModel> findById(String id);
+    Optional<CuentaModel> findByNumero(String numero);
 }

@@ -1,11 +1,14 @@
 package com.bancopichincha.api.controller;
 
-import com.bancopichincha.application.command.create.CreateClienteCommand;
 import com.bancopichincha.application.command.create.CreateCuentaCommand;
-import com.bancopichincha.application.dto.request.CreateClienteRequest;
-import com.bancopichincha.application.dto.response.CreateClienteResponse;
+import com.bancopichincha.application.command.delete.DeleteClienteCommand;
+import com.bancopichincha.application.command.delete.DeleteCuentaCommand;
+import com.bancopichincha.application.command.read.ReadCuentaCommand;
+import com.bancopichincha.application.command.update.UpdateClienteCommand;
+import com.bancopichincha.application.command.update.UpdateCuentaCommand;
 import com.bancopichincha.application.dto.response.CreateCuentaResponse;
 import com.bancopichincha.application.util.Shared;
+import com.bancopichincha.domain.entities.Cuenta;
 import io.jkratz.mediator.core.Mediator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -27,6 +29,7 @@ public class CuentasController {
     public static final String SENDING_QUERY = "------ Sending query in {}: {} {}";
 
     private final Mediator mediator;
+    private Shared utils;
     @Autowired
     public CuentasController(Mediator mediator) {
         this.mediator = mediator;
@@ -46,5 +49,42 @@ public class CuentasController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/{numero}")
+    public ResponseEntity<Cuenta> getCuenta(@PathVariable("numero") String numero) {
+        try {
+            var query = new ReadCuentaCommand(utils.sanitizeString(numero));
+            return new ResponseEntity<>(this.mediator.dispatch(query), HttpStatus.OK);
+        } catch (ResponseStatusException e) {
+            logger.info(e.toString());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PutMapping("/")
+    public ResponseEntity<Void> putCuenta(@Valid @RequestBody UpdateCuentaCommand command) {
+        try{
+            UpdateCuentaCommand safeCommand = new UpdateCuentaCommand();
+            safeCommand.setCuentaId(command.getCuentaId());
+            safeCommand.setEstado(command.getEstado());
+            safeCommand.setNumero(command.getNumero());
+            safeCommand.setTipo(command.getTipo());
+            this.mediator.dispatch(command);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (
+                ResponseStatusException e) {
+            logger.info(e.toString());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCuenta(@PathVariable("id") String id) {
+        try {
+            var query = new DeleteCuentaCommand(utils.sanitizeString(id));
+            this.mediator.dispatch(query);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (ResponseStatusException e) {
+            logger.info(e.toString());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

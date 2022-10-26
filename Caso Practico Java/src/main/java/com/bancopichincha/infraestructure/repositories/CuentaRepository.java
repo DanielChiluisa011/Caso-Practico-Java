@@ -33,6 +33,15 @@ public class CuentaRepository implements ICuentaRepository {
         else
             return null;
     }
+
+    @Override
+    public Cuenta getByNumero(String numero){
+        var obj = jpaCuentaRepository.findByNumero(numero).map(model -> mapper.toEntity(model));
+        if (obj.isPresent())
+            return obj.get();
+        else
+            return null;
+    }
     @Override
     public void update(Cuenta cuenta){
         var cuentaModel = mapper.toModel(cuenta);

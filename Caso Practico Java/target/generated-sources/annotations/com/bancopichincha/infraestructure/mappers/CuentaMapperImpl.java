@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-26T16:06:51-0500",
+    date = "2022-10-26T17:43:14-0500",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.15 (Oracle Corporation)"
 )
 @Component
@@ -24,6 +24,7 @@ public class CuentaMapperImpl implements CuentaMapper {
         Cuenta cuenta = new Cuenta();
 
         cuenta.setCuentaId( model.getId() );
+        cuenta.setNumero( model.getNumero() );
         cuenta.setTipo( model.getTipo() );
         if ( model.getSaldoInicial() != null ) {
             cuenta.setSaldoInicial( Float.parseFloat( model.getSaldoInicial() ) );
@@ -56,6 +57,7 @@ public class CuentaMapperImpl implements CuentaMapper {
         CuentaModel cuentaModel = new CuentaModel();
 
         cuentaModel.setId( entity.getCuentaId() );
+        cuentaModel.setNumero( entity.getNumero() );
         cuentaModel.setTipo( entity.getTipo() );
         cuentaModel.setSaldoInicial( String.valueOf( entity.getSaldoInicial() ) );
         cuentaModel.setEstado( entity.getEstado() );

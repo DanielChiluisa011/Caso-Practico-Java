@@ -37,6 +37,7 @@ public class ClienteRepository implements IClienteRepository {
     }
     @Override
     public void delete(String id){
+        logger.info("delete {}", id);
         jpaClienteRepository.deleteById(id);
     }
 

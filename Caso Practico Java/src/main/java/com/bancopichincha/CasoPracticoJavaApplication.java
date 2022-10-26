@@ -19,7 +19,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan("com.bancopichincha")
 public class CasoPracticoJavaApplication {
     private final ApplicationContext applicationContext;
-
     @Autowired
     public CasoPracticoJavaApplication(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
